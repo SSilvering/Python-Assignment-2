@@ -27,7 +27,6 @@ def Trapez_rule(f, a, b, n):
 
 Trapez_rule(lambda x:x ** 9, 0.0, 10.0, 100000)               # Execute line.
 Trapez_rule(lambda x:x ** 4 + x ** 2 + 1, 0.0, 10.0, 100000)  # Execute line.
-
 #------------------------------------------------------------------------------ 
 #Question -5-
 
@@ -50,9 +49,7 @@ def myFilter(L, func):
         if func(_) == True:
             result.append(_)
     return result
-
 #------------------------------------------------------------------------------ 
-
 def myFilterMulti(L, funcL):
     """
     This method gets a list of numbers and a list of functions, 
@@ -79,10 +76,8 @@ def myFilterMulti(L, funcL):
         if flag:                #If the number has met all conditions it will be added to the new list.
             result.append(_)
             
-    return result
-            
+    return result       
 #------------------------------------------------------------------------------ 
-
 def myPrime(x):
     """
     This method checks if the number is a prime number.
@@ -107,9 +102,7 @@ def myPrime(x):
         return True
 
     return False              #Returns false for all other cases.
-
 #------------------------------------------------------------------------------ 
-
 def isFib(x):
     """
     This method gets a number and checks whether the number is in the Fibonacci sequence. 
@@ -129,8 +122,7 @@ def isFib(x):
         if cur == x:
             return True    
     
-    return False                            #Returns false for all other cases.
-    
+    return False                            #Returns false for all other cases.  
 #------------------------------------------------------------------------------ 
 print(myFilter([2, 4, 5, 6], myPrime))
 print(myFilterMulti([2, 4, 5, 6, 7, 13], [myPrime, isFib]))
@@ -138,4 +130,31 @@ print(myFilterMulti ([2, 4, 5, 13, 41, 55, 89, 107, 144], [myPrime, isFib, lambd
 #------------------------------------------------------------------------------ 
 #Question -6-
 
+def compose(f, g):
+    """
+    This method returns the function composition two other functions.
+    @param f: A function.
+    @type f: Function.
+    @param g: A function.
+    @type g: Function.
+    """
+    return lambda x:f(g(x))
+#------------------------------------------------------------------------------ 
+def repeated(func, n):
+    """
+    This method gets a function f and a number. The method performs 
+    n iterations on the function and returns the answer.
+    @param func: A function.
+    @type func: Function.
+    @param n: Number.
+    @type n: Integer
+    """
+    summ = func
 
+    for _ in range(abs(n) - 1):
+        summ = compose(summ, func)
+
+    return summ
+#------------------------------------------------------------------------------ 
+print(repeated (lambda x:x + 1, 4)(2))
+print(repeated (lambda x:x ** 2, 2)(5))
